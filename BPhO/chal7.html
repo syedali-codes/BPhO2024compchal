@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>Challenge 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Challenge 7</h1>
+
+        <a href="https://replit.com/@SyedAli160/compPhyschal7a#main.py" style="font-size: 10px;">replit link for python code (graph 1)</a>
+        <a href="https://replit.com/@SyedAli160/compPhyschal7b#main.py" style="font-size: 10px;">replit link for python code (graph 2)</a>
+
+        
+
+        
+        <py-env>
+            - matplotlib
+            - numpy
+        </py-env>
+        
+    
+        
+        <div id="chal7a" style="width: 620px; margin: 0 auto;"></div>
+        <py-script output="chal7a">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import math
+    
+    fig, ax = plt.subplots()
+    
+    #setting inputs 
+    # angles (A-F)
+    A = 30
+    B = 45
+    C = 60
+    D = 70.5
+    E = 78
+    F = 85
+
+    u = 10
+    g = 10
+
+    t = np.linspace(0, 2.5, 100)
+    tPower2 = np.power(t,2)
+    tPower3 = np.power(t,3)
+    tPower4 = np.power(t,4)
+
+
+    def sin(angle):
+        return math.sin(math.radians(angle))
+    
+    # calculating t+
+    def tPlus(angle):
+        return ( (3*u)/(2*g) ) * ( sin(angle) + math.sqrt(sin(angle)**2 - (8/9)) )
+
+    # calculating t-
+    def tMinus(angle):
+        return ( (3*u)/(2*g) ) * ( sin(angle) - math.sqrt(sin(angle)**2 - (8/9)) )
+
+    # calculating r 
+    def r(angle):
+        return np.sqrt( (u**2)*(tPower2) - g*(tPower3)*u*sin(angle) + 0.25*(g**2)*(tPower4) )
+
+    # plot lines
+    rA = r(A)
+    rB = r(B)
+    rC = r(C)
+    rD = r(D)
+    rE = r(E)
+    rF = r(F)
+
+    plt.plot(t, rA, color='blue')
+    plt.plot(t, rB, color='green')
+    plt.plot(t, rC, color='red') 
+    plt.plot(t, rD, color='cyan', zorder=1)
+    plt.plot(t, rE, color='purple', zorder=1)
+    plt.plot(t, rF, color='yellow', zorder=1)
+
+
+    # plotting stationary points 
+    # angle D has one stationary point
+    # angles E and F have a maximum and minimum point
+    tD_xcoord = (u*math.sqrt(2)) / (g)
+    tD_ycoord = np.interp(tD_xcoord, t, rD)
+    plt.plot(tD_xcoord, tD_ycoord, marker="x", markersize=5, markeredgecolor="magenta", zorder=2)
+
+
+    tPlusE_xcoord = tPlus(E)
+    tPlusE_ycoord = np.interp(tPlusE_xcoord, t, rE)
+    plt.plot(tPlusE_xcoord, tPlusE_ycoord, marker="x", markersize=5, markeredgecolor="black", zorder=2)
+
+    tMinusE_xcoord = tMinus(E)
+    tMinusE_ycoord = np.interp(tMinusE_xcoord, t, rE)
+    plt.plot(tMinusE_xcoord, tMinusE_ycoord, marker="x", markersize=5, markeredgecolor="magenta", zorder=2)
+
+
+    tPlusF_xcoord = tPlus(F)
+    tPlusF_ycoord = np.interp(tPlusF_xcoord, t, rF)
+    plt.plot(tPlusF_xcoord, tPlusF_ycoord, marker="x", markersize=5, markeredgecolor="black", zorder=2)
+
+    tMinusF_xcoord = tMinus(F)
+    tMinusF_ycoord = np.interp(tMinusF_xcoord, t, rF)
+    plt.plot(tMinusF_xcoord, tMinusF_ycoord, marker="x", markersize=5, markeredgecolor="magenta", zorder=2)
+
+
+
+    plt.title('Projectiles: v=10m/s, g=10m/s^2')
+    plt.xlabel('t /s')
+    plt.ylabel('range r /m')
+
+    plt.xlim(0, 2.5)
+    plt.ylim(0, 28.5)
+    plt.grid()
+    
+    fig
+        </py-script>
+
+
+        <div id="chal7b" style="width: 620px; margin: 0 auto;"></div>
+        <py-script output="chal7b">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import math
+    
+    fig, ax = plt.subplots()
+    
+    #setting inputs 
+    # angles (A-F)
+    A = 30
+    B = 45
+    C = 60
+    D = 70.5
+    E = 78
+    F = 85
+
+    u = 10
+    g = 10
+    h = 0
+
+    x = np.linspace(0, 15, 100)
+
+
+    def sin(angle):
+        return math.sin(math.radians(angle))
+
+    def cos(angle):
+        return math.cos(math.radians(angle))
+
+    def tan(angle):
+        return math.tan(math.radians(angle))
+
+    def lineEquation(angle):
+        return h + x * tan(angle) - (g*np.square(x)*(1+tan(angle)**2))/(2*u**2)
+
+    
+    lineA = lineEquation(A)
+    lineB = lineEquation(B)
+    lineC = lineEquation(C)
+    lineD = lineEquation(D)
+    lineE = lineEquation(E)
+    lineF = lineEquation(F)
+
+    plt.plot(x, lineA, color='blue')
+    plt.plot(x, lineB, color='green')
+    plt.plot(x, lineC, color='red')
+    plt.plot(x, lineD, color='cyan')
+    plt.plot(x, lineE, color='purple')
+    plt.plot(x, lineF, color='yellow')
+
+
+    plt.title('Projectiles: v=10m/s, g=10m/s^2')
+    plt.xlabel('x /m')
+    plt.ylabel('y /m')
+
+    plt.xlim(0, 15)
+    plt.ylim(-5, 5)
+    plt.grid()
+    
+    fig
+        </py-script>
+        
+        <div class="back-button">
+            <a href="homepage.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

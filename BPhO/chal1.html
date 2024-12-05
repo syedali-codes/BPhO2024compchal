@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>Challenge 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            font-size: 30px;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Challenge 1</h4>
+
+        <a href="https://replit.com/@SyedAli160/compPhyschal1" style="font-size: 10px;">replit link for python code</a>
+        
+       
+        
+        <py-env>
+            - matplotlib
+            - numpy
+        </py-env>
+        
+    
+        
+        <div id="chal1" style="width: 620px; margin: 0 auto;"></div>
+        <py-script output="chal1">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import math
+    
+    fig, ax = plt.subplots()
+    
+    # declaring values
+    g = 9.81
+    h = 2
+    u = 20
+    theta = 45
+    
+    x_initial = u*math.cos(math.radians(theta))
+    y_initial = u*math.sin(math.radians(theta))
+    
+    
+    t = np.arange(0,3.1,0.02)    
+    x = x_initial * t           
+    y = h + y_initial * t - 0.5 * g * t**2  
+    
+    plt.plot(x,y)
+    
+    plt.xlim(0, 50)
+    plt.ylim(0,14)
+    
+    plt.title('Projectile motion model')
+    plt.xlabel('x /m')
+    plt.ylabel('y /m')
+    
+    plt.grid()
+    
+    fig
+        </py-script>
+
+
+        
+        <div class="back-button">
+            <a href="homepage.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

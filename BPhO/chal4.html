@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>Challenge 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Challenge 4</h1>
+
+        <a href="" style="font-size: 10px;">replit link for python code</a>
+        
+        <py-env>
+            - matplotlib
+            - numpy
+        </py-env>
+        
+    
+        
+        <div id="chal4" style="width: 620px; margin: 0 auto;"></div>
+        <py-script output="chal4">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import math
+    
+    fig, ax = plt.subplots()
+    
+    u = 10
+    h = 2
+    g = 9.81
+    theta = 60
+
+    x = np.linspace(0, 13, 100)
+
+
+    sinTheta = math.sin(math.radians(theta))
+    cosTheta = math.cos(math.radians(theta))
+    tanTheta = math.tan(math.radians(theta))
+
+
+    yNormal = h + x * tanTheta - (g*np.square(x)*(1+tanTheta**2))/(2*u**2)
+
+
+    R_x = ((u**2)/g) * (sinTheta * cosTheta + cosTheta * math.sqrt(sinTheta**2 + (2*g*h)/(u**2)))
+    R_y = np.interp(R_x, x, yNormal)
+    plt.plot(R_x, R_y, marker="x", markersize=10, markeredgecolor="red", markeredgewidth=2, zorder=2)
+
+
+    thetaMax = math.asin(1/(math.sqrt(2+2*g*h/(u**2))))
+    RMax = ((u**2)/g) * math.sqrt(1+(2*g*h)/u**2)
+    tanThetaMax = math.tan(thetaMax)
+
+    yMax = h + x * tanThetaMax - (g*np.square(x)*(1+tanThetaMax**2))/(2*u**2)
+
+
+
+    plt.plot(x, yMax, color='red', linestyle='dashed')
+    plt.plot(x, yNormal, color='blue', zorder=1)
+
+    plt.title('')
+    plt.xlabel('x /m')
+    plt.ylabel('y /m')
+
+    plt.xlim(0, 14)
+    plt.ylim(0, 6)
+    plt.grid()
+    
+    fig
+        </py-script>
+
+
+        
+        <div class="back-button">
+            <a href="homepage.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

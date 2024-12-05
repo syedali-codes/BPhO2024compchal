@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>Challenge 5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Challenge 5</h1>
+
+        <a href="" style="font-size: 10px;">replit link for python code</a>
+        
+        <py-env>
+            - matplotlib
+            - numpy
+        </py-env>
+        
+    
+        
+        <div id="chal5" style="width: 620px; margin: 0 auto;"></div>
+        <py-script output="chal5">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import math
+    
+    fig, ax = plt.subplots()
+    
+    u = 1.3063*115
+    g = 9.81
+    h = 0 
+    X = 1000
+    Y = 300
+    
+    x = np.linspace(0, 2500, 1000)
+    
+    
+    #bounding line
+    y_boundingParabola = ((u**2)/(2*g)) - ((g*np.square(x))/(2*u**2))
+    
+    
+    #max range line
+    thetaMax = math.asin(1/(math.sqrt(2+2*g*h/(u**2))))
+    RMax = ((u**2)/g) * math.sqrt(1+(2*g*h)/u**2)
+    tanThetaMax = math.tan(thetaMax)
+    
+    yMax = h + x * tanThetaMax - (g*np.square(x)*(1+tanThetaMax**2))/(2*u**2)
+    
+    
+    #high + low + min u line
+    a = (g*X**2)/(2*u**2)
+    
+    b = -X
+    
+    c = Y - h + (g*X**2)/(2*u**2)
+    
+    
+    #high line
+    thetaHigh = math.atan((-b+math.sqrt((b**2)-4*a*c))/(2*a))
+    yHigh = h + x * math.tan(thetaHigh) - (g*np.square(x)*(1+math.tan(thetaHigh)**2))/(2*u**2)
+    
+    
+    #low line
+    thetaLow = math.atan((-b-math.sqrt((b**2)-4*a*c))/(2*a))
+    yLow = h + x * math.tan(thetaLow) - (g*np.square(x)*(1+math.tan(thetaLow)**2))/(2*u**2)
+    
+    
+    #min u line
+    thetaMin = math.atan((Y + math.sqrt((Y**2)+(X**2)))/X)
+    uMin = math.sqrt(g) * math.sqrt(Y+math.sqrt(X**2+Y**2))
+    yMin = h + x * math.tan(thetaMin) - (g*np.square(x)*(1+math.tan(thetaMin)**2))/(2*uMin**2)
+    
+    
+    
+    
+    plt.plot(x, y_boundingParabola, color='purple', linestyle='dashed')
+    plt.plot(x, yMax, color='red', linestyle='dashed')
+    plt.plot(x, yHigh, color='blue')
+    plt.plot(x, yLow, color='green')
+    plt.plot(x, yMin, color='black', linestyle='dashed')
+    
+    
+    plt.title('Projectile through (1000,300), u=1.3063*115ms^-1 . g=9.81ms^-2 . h=0m')
+    plt.xlabel('x /m')
+    plt.ylabel('y /m')
+    
+    plt.xlim(0, 2500)
+    plt.ylim(0, 1200)
+    plt.grid()
+    
+    fig
+        </py-script>
+
+
+        
+        <div class="back-button">
+            <a href="homepage.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

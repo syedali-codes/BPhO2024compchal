@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>Challenge 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 30px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Challenge 3</h1>
+
+        <a href="https://replit.com/@SyedAli160/compPhyschal3" style="font-size: 10px;">replit link for python code</a>
+        
+        <py-env>
+            - matplotlib
+            - numpy
+        </py-env>
+        
+    
+        
+        <div id="chal3" style="width: 620px; margin: 0 auto;"></div>
+        <py-script output="chal3">
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import math
+    
+    fig, ax = plt.subplots()
+    
+    X = 1000
+    Y = 300
+    u = 150
+    h = 0 
+    g = 9.81
+
+
+    x = np.linspace(0, X, 100)
+
+
+    a = (g*X**2)/(2*u**2)
+
+    b = -X
+
+    c = Y - h + (g*X**2)/(2*u**2)
+
+
+
+    thetaHigh = math.atan((-b+math.sqrt((b**2)-4*a*c))/(2*a))
+    thetaLow = math.atan((-b-math.sqrt((b**2)-4*a*c))/(2*a))
+
+    thetaMin = math.atan((Y + math.sqrt((Y**2)+(X**2)))/X)
+    uMin = math.sqrt(g) * math.sqrt(Y+math.sqrt(X**2+Y**2))
+
+
+    yMin = h + x * math.tan(thetaMin) - (g*np.square(x)*(1+math.tan(thetaMin)**2))/(2*uMin**2)
+    yHigh = h + x * math.tan(thetaHigh) - (g*np.square(x)*(1+math.tan(thetaHigh)**2))/(2*u**2)
+    yLow = h + x * math.tan(thetaLow) - (g*np.square(x)*(1+math.tan(thetaLow)**2))/(2*u**2)
+
+
+
+    plt.plot(x, yHigh, color='blue', linewidth=2.5)
+    plt.plot(x, yLow, color='orange', linewidth=2.5)
+    plt.plot(x, yMin, color='gray', linewidth=2.5)
+
+    plt.plot(X, Y, marker=".", markersize=10, markeredgecolor="black", markerfacecolor="yellow")
+    plt.plot(1030, 220, marker="$( X,Y )$", markersize=30, markeredgecolor="black", markerfacecolor="black")
+
+    plt.title('Projectile to hit X,Y')
+    plt.xlabel('x /m')
+    plt.ylabel('y above launch height(0m) /m')
+
+
+    plt.xlim(0, 1200)
+    plt.ylim(0,1200.00)
+    plt.grid()
+    
+    fig
+        </py-script>
+
+
+        
+        <div class="back-button">
+            <a href="homepage.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
